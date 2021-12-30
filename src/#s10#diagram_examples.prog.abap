@@ -1,4 +1,4 @@
-program /s10/diagram01.
+program /s10/diagram_examples.
 
 * kna1_detail
 class kna1_detail definition inheriting from /s10/any.
@@ -29,7 +29,21 @@ class kna1_detail implementation.
 
 endclass.
 
+* diagrams
+class diagrams_viewer definition inheriting from /s10/any.
 
+  public section.
+
+data:
+        diagram_chosen_example type string.
+
+
+endclass.
+
+
+class diagrams_viewer implementation.
+
+endclass.
 
 *
 class kna1_short definition inheriting from /s10/any.
@@ -171,7 +185,8 @@ class main definition inheriting from /s10/any.
 
   public section.
 
-    data: my_kna1_manager type ref to kna1_manager.
+    data: my_kna1_manager type ref to kna1_manager,
+          mydiagrams_viewer type ref to diagrams_viewer.
 
     methods:
       logon.
@@ -187,10 +202,10 @@ class main implementation.
     s10setlicense( 'Synactive GmbH demo license number=100 role=s10demo_role maxusers=10 signature=821.126.87.7' ).
 
 *  create manager object
-    create object my_kna1_manager.
+    create object mydiagrams_viewer.
 
 * start list display
-    my_kna1_manager->list( ).
+    mydiagrams_viewer->s10nextscreen( 'diagram_overview').
 
   endmethod.
 endclass.
